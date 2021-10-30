@@ -1,13 +1,15 @@
 'use strict';
 
-for (let i = 1; i < 100; i++) {
-  if (i % 3 == 0 && i % 5 == 0) {
-    console.log(`FizzBuzz ${i}`);
-  }
-  else if (i % 3 == 0) {
-    console.log(`Fizz ${i}`);
-  }
-  else if (i % 5 == 0) {
-    console.log(`Buzz ${i}`);
+
+var suuti = 100;
+while (suuti > 0) {
+  var name = prompt("日本の首都は？");
+
+  if (name == '東京都') {
+    alert("正解です");
+    break;
+  } 
+  else {
+    alert('不正解です');
   }
 }
