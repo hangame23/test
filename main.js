@@ -1,4 +1,4 @@
-var todo = ['掃除', '買い物', '散歩'];
+let todo = ['掃除', '買い物', '散歩'];
 
 function tekisuto2() {
     console.log('**************************');
@@ -6,7 +6,7 @@ function tekisuto2() {
     console.log('**************************');
 }
 function tekisuto3() {
-  for(var i = 0; i < todo.length; i++) {
+  for(let i = 0; i < todo.length; i++) {
     console.log(i + ':' + todo[i]);
   }
 }
@@ -14,7 +14,7 @@ function tekisuto3() {
 tekisuto2();
 tekisuto3();
 
-var tekisuto11 = prompt('追加してください');
+const tekisuto11 = prompt('追加してください');
 todo.push(tekisuto11);
 tekisuto2();
 tekisuto3();
