@@ -1,25 +1,26 @@
-let todo = ['掃除', '買い物', '散歩'];
+const tasks = ['掃除', '買い物', '散歩'];
 
-function tekisuto2() {
+let createTitle = () => {
     console.log('**************************');
     console.log("現在持っているタスク一覧");
     console.log('**************************');
 }
-function tekisuto3() {
-  for(let i = 0; i < todo.length; i++) {
-    console.log(i + ':' + todo[i]);
-  }
+let showTasks = () => {
+  tasks.forEach((task, index) => {
+    console.log(`${index}: ${task}`);
+  });
 }
 
-tekisuto2();
-tekisuto3();
+createTitle();
+showTasks();
 
-const tekisuto11 = prompt('追加してください');
-todo.push(tekisuto11);
-tekisuto2();
-tekisuto3();
+let task = prompt('追加してください'); //タスク追加
+tasks.push(task);
 
-alert ("新しいタスクを追加しました");
+createTitle();
+showTasks();
+
+ alert ("新しいタスクを追加しました");
   
 
   
