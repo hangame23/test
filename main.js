@@ -1,4 +1,10 @@
-const tasks = ['掃除', '買い物', '散歩'];
+'use strict';
+
+const tasks = {
+  '机を掃除' : '掃除', 
+  '牛乳を買う' : '買い物', 
+  '散歩する' :  '運動',
+};
 
 const createTitle = () => {
     console.log('**************************');
@@ -6,20 +12,35 @@ const createTitle = () => {
     console.log('**************************');
 }
 const showTasks = () => {
-  tasks.forEach((task, index) => {
-    console.log(`${index}: ${task}`);
+  const keys = Object.keys(tasks);
+  keys.forEach((key) => {
+    console.log(`[内容]${key} 、[ジャンル]${tasks[key]}`);
   });
 }
 
 createTitle();
 showTasks();
 
-const task = prompt('追加してください'); //タスク追加
-tasks.push(task);
+const contents = prompt('内容を入力してください'); 
+const  genre = prompt('ジャンルを入力してください'); 
+
+tasks[contents] = genre;
 
 createTitle();
 showTasks();
 
  alert ("新しいタスクを追加しました");
-  
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
  
