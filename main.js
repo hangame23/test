@@ -1,41 +1,25 @@
 'use strict';
-
-const showMessage = () => {
-  const fizznumbox = document.getElementById('fizznum');  //fizznumの値を取得
-  const bizznumbox = document.getElementById('bizznum');  //bizznumの値を取得
-  let fizznum = fizznumbox.value; //fizznumの値を代入
-  let bizznum = bizznumbox.value; //bizznumの値を代入
-  let fizznum2;
-  let bizznum2;
-  const check = fizznum.match(/[^0-9]/);
-  const check2 = bizznum.match(/[^0-9]/);
-  console.log(check);
-  for (let i = 1; fizznum < 100; i++ ) {
-    fizznum2 = fizznum * i;
-    bizznum2 = bizznum * i;
-    if (!fizznum || check && !bizznum2 || check2) {
-      document.getElementById('msg').innerHTML = "数字を入力してください";
-      break;
+  document.getElementById('button').addEventListener('click', () => {
+    let fizz = document.getElementById('fizznum').value;
+    let buzz = document.getElementById('buzznum').value;
+    const pattern = /^[-]?([1-9]\d*|0)$/;  //整数のみを受け付ける正規表現
+    const ul = document.getElementById('list');
+    if (!(pattern.test(fizz)) || !(pattern.test(buzz))) {
+      const li = document.createElement('li');
+      li.textContent = '整数を入力して下さい。';
+      ul.appendChild(li);
+      return;
     }
-    if (fizznum2 > 99) {
-      break;
+    for (let i = 1; i < 100; i++) {
+       fizz = fizz * i;
+       buzz = buzz * i;
+      if (fizz % i == 0 && buzz % i == 0) {
+        ul.textContent = `FizzBuzz ${fizz}`;
+      }else if (fizz > buzz) {
+        ul.textContent = `buzz ${buzz}`;
+      }else if (buzz > fizz) {
+        ul.textContent = `fizz ${fizz}`;
+      }
     }
-    if (bizznum2 > 99) {
-      break;
-    }
-    if (fizznum2 && fizznum == 0 && fizznum2 % bizznum == 0) {
-      console.log("Fizzbuz" + fizznum2);
-      document.getElementById('msg').innerHTML = fizznum2;
-    } else if (fizznum2 > bizznum2) {
-      console.log(bizznum2);
-      console.log(fizznum2);
-      document.getElementById('msg').innerHTML = bizznum2;
-      document.getElementById('msg').innerHTML = fizznum2;
-    } else {
-      console.log(bizznum2);
-      console.log(fizznum2);
-      document.getElementById('msg').innerHTML = fizznum2;
-      document.getElementById('msg').innerHTML = bizznum2;
-    }
-  }
-}
+    //fizzbuzz処理
+  });
