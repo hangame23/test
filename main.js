@@ -10,15 +10,32 @@
       ul.appendChild(li);
       return;
     }
-    for (let i = 1; i < 100; i++) {
-       fizz = fizz * i;
-       buzz = buzz * i;
-      if (fizz % i == 0 && buzz % i == 0) {
-        ul.textContent = `FizzBuzz ${fizz}`;
-      }else if (fizz > buzz) {
-        ul.textContent = `buzz ${buzz}`;
-      }else if (buzz > fizz) {
-        ul.textContent = `fizz ${fizz}`;
+for (let i = 1; i < 100; i++) {
+
+      if (i % fizz === 0 && i % buzz === 0) {
+
+        const li = document.createElement('li');
+
+        li.textContent = i + 'FizzBuzz';
+
+        ul.appendChild(li);
+
+      } else if (i % fizz === 0) {
+
+        const li = document.createElement('li');
+
+        li.textContent = `${i} Fizz`;
+
+        ul.appendChild(li);
+
+      } else if (i % buzz === 0) {
+
+        const li = document.createElement('li');
+
+        li.textContent = `${i} Buzz`;
+
+        ul.appendChild(li);
+
       }
     }
     //fizzbuzz処理
