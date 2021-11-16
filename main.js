@@ -1,74 +1,71 @@
 {
-   const url = 'https://opentdb.com/api.php?amount=10&type=multiple'; 
-  
-   class Quiz {
-    constructor(quizData) {
-      this._quizzes = quizData.results;
-      this._correctAnswersNum = 0;
-    }
-  
-    getQuizCategory(index) {
-      return this._quizzes[index - 1].category;
-    }
-  
-    getQuizDifficulty(index) {
-      return this._quizzes[index - 1].difficulty;
-    }
-  
-    getNumOfQuiz() {
-      return this._quizzes.length;
-    }
-  
-    getQuizQuestion(index) {
-      return this._quizzes[index - 1].question;
-    }
-  
-    getCorrectAnswer(index) {
-      return this._quizzes[index - 1].correct_answer;
-    }
-  
-    getIncorrectAnswers(index) {
-      return this._quizzes[index - 1].incorrect_answers;
-    }
-  
-    countCorrectAnswersNum(index, answer) {
-      const correctAnswer = this._quizzes[index - 1].correct_answer;
-      if (answer === correctAnswer) {
-        return this._correctAnswersNum++;
+  try { 
+    const url = 'https://opentdb.com/api.php?amount=10&type=multiple'; 
+    
+    class Quiz {
+      constructor(quizData) {
+        this._quizzes = quizData.results;
+        this._correctAnswersNum = 0;
+      }
+    
+      getQuizCategory(index) {
+        return this._quizzes[index - 1].category;
+      }
+    
+      getQuizDifficulty(index) {
+        return this._quizzes[index - 1].difficulty;
+      }
+    
+      getNumOfQuiz() {
+        return this._quizzes.length;
+      }
+    
+      getQuizQuestion(index) {
+        return this._quizzes[index - 1].question;
+      }
+    
+      getCorrectAnswer(index) {
+        return this._quizzes[index - 1].correct_answer;
+      }
+    
+      getIncorrectAnswers(index) {
+        return this._quizzes[index - 1].incorrect_answers;
+      }
+    
+      countCorrectAnswersNum(index, answer) {
+        const correctAnswer = this._quizzes[index - 1].correct_answer;
+        if (answer === correctAnswer) {
+          return this._correctAnswersNum++;
+        }
+      }
+    
+      getCorrectAnswersNum() {
+        return this._correctAnswersNum;
       }
     }
-  
-    getCorrectAnswersNum() {
-      return this._correctAnswersNum;
-    }
-  }
-  
-    const titleElement = document.getElementById('title');
-    const questionElement = document.getElementById('question');
-    const answersContainer = document.getElementById('answers');
-    const startButton = document.getElementById('start-button');
-    const genreElement = document.getElementById('genre');
-    const difficultyElement = document.getElementById('difficulty');
-  
-    startButton.addEventListener('click', () => {
-      startButton.hidden = true;
-      fetchQuizData(1);
-    });
-  
-    const fetchQuizData = async (index) => {
-      titleElement.textContent = '取得中';
-      questionElement.textContent = '少々お待ち下さい';
-  
-      const response = await fetch(url);
-      const quizData = await response.json();
-      const quizInstance = new Quiz(quizData);
-  
-      setNextQuiz(quizInstance, index);
-      
+      const titleElement = document.getElementById('title');
+      const questionElement = document.getElementById('question');
+      const answersContainer = document.getElementById('answers');
+      const startButton = document.getElementById('start-button');
+      const genreElement = document.getElementById('genre');
+      const difficultyElement = document.getElementById('difficulty');
+    
+      startButton.addEventListener('click', () => {
+        startButton.hidden = true;
+        fetchQuizData(1);
+      });
+    
+      const fetchQuizData = async (index) => {
+        titleElement.textContent = '取得中';
+        questionElement.textContent = '少々お待ち下さい';
+    
+        const response = await fetch(url);
+        const quizData = await response.json();
+        const quizInstance = new Quiz(quizData);
+    
+        setNextQuiz(quizInstance, index);
     };
-    
-    
-  
+
     const setNextQuiz = (quizInstance, index) => {
       while (answersContainer.firstChild) {
         answersContainer.removeChild(answersContainer.firstChild);
@@ -134,4 +131,7 @@
       }
       return array;
     };
+  } catch (e) {
+    console.log(e);
   }
+}
