@@ -65,7 +65,7 @@
           setNextQuiz(quizInstance, index);
         }
         catch (e) {
-          titleElement.textContent = 
+          titleElement.textContent = 'エラーが発生しました';
           console.error(e);
         }
       };
