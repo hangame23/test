@@ -1,48 +1,48 @@
 {
-  try { 
-    const url = 'https://opentdb.com/api.php?amount=10&type=multiple'; 
+  const url = 'https://opentdb.com/api.php?amount=10&type=multiple'; 
+ 
+  class Quiz {
+    constructor(quizData) {
+      this._quizzes = quizData.results;
+      this._correctAnswersNum = 0;
+    }
     
-    class Quiz {
-      constructor(quizData) {
-        this._quizzes = quizData.results;
-        this._correctAnswersNum = 0;
-      }
+    getQuizCategory(index) {
+      return this._quizzes[index - 1].category;
+    }
     
-      getQuizCategory(index) {
-        return this._quizzes[index - 1].category;
-      }
+    getQuizDifficulty(index) {
+      return this._quizzes[index - 1].difficulty;
+    }
     
-      getQuizDifficulty(index) {
-        return this._quizzes[index - 1].difficulty;
-      }
+    getNumOfQuiz() {
+      return this._quizzes.length;
+    }
     
-      getNumOfQuiz() {
-        return this._quizzes.length;
-      }
+    getQuizQuestion(index) {
+      return this._quizzes[index - 1].question;
+    }
     
-      getQuizQuestion(index) {
-        return this._quizzes[index - 1].question;
-      }
+    getCorrectAnswer(index) {
+      return this._quizzes[index - 1].correct_answer;
+    }
     
-      getCorrectAnswer(index) {
-        return this._quizzes[index - 1].correct_answer;
-      }
+    getIncorrectAnswers(index) {
+      return this._quizzes[index - 1].incorrect_answers;
+    }
     
-      getIncorrectAnswers(index) {
-        return this._quizzes[index - 1].incorrect_answers;
-      }
-    
-      countCorrectAnswersNum(index, answer) {
-        const correctAnswer = this._quizzes[index - 1].correct_answer;
-        if (answer === correctAnswer) {
-          return this._correctAnswersNum++;
-        }
-      }
-    
-      getCorrectAnswersNum() {
-        return this._correctAnswersNum;
+    countCorrectAnswersNum(index, answer) {
+      const correctAnswer = this._quizzes[index - 1].correct_answer;
+      if (answer === correctAnswer) {
+        return this._correctAnswersNum++;
       }
     }
+    
+    getCorrectAnswersNum() {
+      return this._correctAnswersNum;
+    }
+  }
+
       const titleElement = document.getElementById('title');
       const questionElement = document.getElementById('question');
       const answersContainer = document.getElementById('answers');
@@ -58,13 +58,17 @@
       const fetchQuizData = async (index) => {
         titleElement.textContent = '取得中';
         questionElement.textContent = '少々お待ち下さい';
-    
-        const response = await fetch(url);
-        const quizData = await response.json();
-        const quizInstance = new Quiz(quizData);
-    
-        setNextQuiz(quizInstance, index);
-    };
+        try {
+          const response = await fetch(url);
+          const quizData = await response.json();
+          const quizInstance = new Quiz(quizData);
+          setNextQuiz(quizInstance, index);
+        }
+        catch (e) {
+          titleElement.textContent = 
+          console.error(e);
+        }
+      };
 
     const setNextQuiz = (quizInstance, index) => {
       while (answersContainer.firstChild) {
@@ -77,7 +81,7 @@
         finishQuiz(quizInstance);
       }
     };
-  
+    
     const makeQuiz = (quizInstance, index) => {
       titleElement.innerHTML = `問題 ${index}`;
       genreElement.innerHTML = `【ジャンル】 ${quizInstance.getQuizCategory(index)}`;
@@ -131,7 +135,5 @@
       }
       return array;
     };
-  } catch (e) {
-    console.log(e);
-  }
+  
 }
